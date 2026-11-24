@@ -1,4 +1,10 @@
 import { createRequestHandler } from 'expo-server/adapter/workerd';
 
-// `expo export -p web` writes the API + server code to dist/server.
-export default createRequestHandler({ build: '../dist/server' });
+const handler = createRequestHandler({ build: '../dist/server' });
+
+export default {
+    async fetch(request: Request, env: any, ctx: any): Promise<Response> {
+        return handler(request, env, ctx);
+    },
+};
+
